@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Local Job Portal — Rural Youth</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1 id="brandTitle">Local Job Portal</h1>
+        <small id="brandSubtitle">For Rural Youth</small>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-btn" data-target="jobsSection">Jobs</button>
+        <button class="nav-btn" data-target="trainingSection">Training</button>
+        <button class="nav-btn" data-target="guidanceSection">Guidance</button>
+        <button class="nav-btn" data-target="communitySection">Community</button>
+        <button class="nav-btn" data-target="adminSection">Admin</button>
+      </nav>
+
+      <div class="header-actions">
+        <select id="langSelect" aria-label="language">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी</option>
+        </select>
+        <button id="openAuth">Login / Signup</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-grid">
+
+    <!-- Jobs Column -->
+    <section class="panel" id="jobsSection">
+      <div class="panel-head">
+        <h2 id="jobsTitle">Job Listings</h2>
+        <div class="small" id="jobsCount">0 results</div>
+      </div>
+
+      <div class="card search-card">
+        <input id="searchQ" placeholder="Search jobs, skills, employers..." />
+        <select id="filterDistrict">
+          <option value="">Select District</option>
+        </select>
+        <select id="filterTaluka">
+          <option value="">Select Taluka</option>
+        </select>
+        <input id="filterVillage" placeholder="Village (optional)" />
+        <select id="filterType">
+          <option value="">All job types</option>
+          <option>Full Time</option>
+          <option>Part Time</option>
+          <option>Apprenticeship</option>
+          <option>Daily Wage</option>
+        </select>
+        <button id="searchBtn">Search</button>
+      </div>
+
+      <div id="jobList" class="card jobs-list"></div>
+
+      <div class="card quick-apply">
+        <h3>Quick Apply (Demo)</h3>
+        <form id="quickApplyForm">
+          <input id="qaName" placeholder="Full name" required />
+          <input id="qaPhone" placeholder="Phone number" required />
+          <textarea id="qaMsg" placeholder="Short message / skills"></textarea>
+          <div class="row">
+            <button type="submit">Send Application</button>
+            <button id="enableAlerts" type="button">Enable Alerts (Demo)</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Sidebar -->
+    <aside class="panel sidebar">
+      <div class="card">
+        <h3>For Employers</h3>
+        <p class="muted">Post jobs quickly and reach local youth.</p>
+        <button id="openPostJob">Post a Job</button>
+      </div>
+
+      <div class="card" id="trainingSection">
+        <h3>Skill Training</h3>
+        <ul id="trainingList" class="training-list"></ul>
+      </div>
+
+      <div class="card" id="guidanceSection">
+        <h3>Career Guidance</h3>
+        <div>
+          <button class="small-btn" id="resumeTipsBtn">Resume Tips</button>
+          <button class="small-btn" id="interviewTipsBtn">Interview Tips</button>
+          <button class="small-btn" id="successStoriesBtn">Success Stories</button>
+        </div>
+        <div id="guidanceContent" style="margin-top:8px"></div>
+      </div>
+
+      <div class="card" id="communitySection">
+        <h3>Community</h3>
+        <button id="openCommunityPost">New Post</button>
+        <div id="communityFeed" class="community-feed"></div>
+      </div>
+    </aside>
+
+    <!-- Admin Panel -->
+    <section class="panel wide" id="adminSection">
+      <div class="card">
+        <h2>Admin Panel (basic)</h2>
+        <p class="muted">View and manage job postings and users (demo).</p>
+
+        <div class="admin-grids">
+          <div>
+            <h4>Jobs</h4>
+            <div id="adminJobList"></div>
+          </div>
+          <div>
+            <h4>Users</h4>
+            <div id="adminUserList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal: Post Job -->
+  <div id="modalOverlay" class="modal hidden" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="closeModal">×</button>
+      <h3 id="modalTitle">Post Job</h3>
+      <form id="postJobForm">
+        <input id="jobTitle" placeholder="Job title (e.g., Farm Assistant)" required />
+        <select id="districtPost">
+          <option value="">Select District</option>
+        </select>
+        <select id="talukaPost">
+          <option value="">Select Taluka</option>
+        </select>
+        <input id="villagePost" placeholder="Village (optional)" />
+        <input id="jobType" placeholder="Job Type (e.g., Full Time, Part Time)" />
+        <input id="jobSalary" placeholder="Salary / stipend" />
+        <textarea id="jobDesc" placeholder="Short description and required skills"></textarea>
+        <div class="row">
+          <button type="button" id="cancelPost">Cancel</button>
+          <button type="submit">Publish Job</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Auth -->
+  <div id="authOverlay" class="modal hidden" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="closeAuth">×</button>
+      <h3 id="authTitle">Login / Signup</h3>
+
+      <div class="auth-tabs">
+        <button class="tab active" data-tab="loginTab">Login</button>
+        <button class="tab" data-tab="signupTab">Signup</button>
+      </div>
+
+      <div id="loginTab" class="auth-tab active">
+        <form id="loginForm">
+          <input id="loginEmail" placeholder="Email" required />
+          <input id="loginPassword" placeholder="Password" type="password" required />
+          <select id="loginRole">
+            <option value="jobseeker">Job Seeker</option>
+            <option value="employer">Employer</option>
+            <option value="admin">Admin</option>
+          </select>
+          <div class="row">
+            <button type="submit">Login</button>
+            <button type="button" id="demoUser">Use Demo User</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="signupTab" class="auth-tab">
+        <form id="signupForm">
+          <input id="signupName" placeholder="Full name" required />
+          <input id="signupEmail" placeholder="Email" required />
+          <input id="signupPassword" placeholder="Create password" type="password" required />
+          <select id="signupRole">
+            <option value="jobseeker">Job Seeker</option>
+            <option value="employer">Employer</option>
+          </select>
+          <div class="row">
+            <button type="submit">Create account</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Community Post -->
+  <div id="communityOverlay" class="modal hidden" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="closeCommunity">×</button>
+      <h3>New Community Post</h3>
+      <form id="communityForm">
+        <input id="postAuthor" placeholder="Your name" required />
+        <textarea id="postContent" placeholder="Share a tip, success story or question" required></textarea>
+        <div class="row">
+          <button type="button" id="cancelCommunity">Cancel</button>
+          <button type="submit">Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small id="footerText">© 2025 Local Job Portal — Built for rural youth</small>
+    </div>
+  </footer>
+
+  <script src="local.js"></script>
+</body>
+</html>
+

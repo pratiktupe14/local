@@ -1,0 +1,70 @@
+:root{
+  --brand:#2b7a78; --accent:#f6a623; --muted:#6b6b6b; --bg:#f8fbfb;
+  --card-bg:#ffffff; --radius:12px; --max-width:1100px;
+}
+
+*{box-sizing:border-box}
+body{
+  font-family:Inter,Arial,Helvetica,sans-serif;margin:0;background:var(--bg);color:#222;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+.container{max-width:var(--max-width);margin:0 auto;padding:16px}
+
+/* Header */
+.site-header{background:linear-gradient(90deg,var(--brand),#1f6a66);color:#fff;padding:14px 0}
+.header-inner{display:flex;align-items:center;gap:12px;justify-content:space-between}
+.brand h1{margin:0;font-size:18px}
+.brand small{opacity:0.9}
+.nav{display:flex;gap:8px}
+.nav-btn{background:transparent;border:none;color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer}
+.header-actions{display:flex;align-items:center;gap:8px}
+.header-actions select{padding:8px;border-radius:8px;border:none}
+.header-actions button{background:#fff;color:var(--brand);padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+
+/* layout */
+.main-grid{display:grid;grid-template-columns:1fr 340px;gap:16px;padding:18px 0}
+.panel{display:block}
+.sidebar .card{margin-bottom:12px}
+.wide{grid-column:1 / -1}
+
+/* Cards */
+.card{background:var(--card-bg);border-radius:var(--radius);padding:12px;box-shadow:0 8px 24px rgba(16,24,24,0.06)}
+.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.small{font-size:13px;color:var(--muted)}
+.muted{color:var(--muted)}
+
+/* search card */
+.search-card{display:grid;grid-template-columns:1fr 160px 160px 120px 140px;gap:8px;align-items:center}
+.search-card input, .search-card select{padding:10px;border:1px solid #ececec;border-radius:8px}
+.search-card button{background:var(--brand);color:#fff;border:none;padding:10px;border-radius:8px;cursor:pointer}
+
+/* jobs list */
+.jobs-list .job-item{display:flex;justify-content:space-between;gap:12px;padding:12px;border-bottom:1px solid #f3f3f3}
+.job-main h3{margin:0;font-size:16px}
+.job-meta{color:var(--muted);font-size:13px;margin-top:6px}
+.job-actions button{margin-left:6px;padding:8px;border-radius:8px;border:none;cursor:pointer}
+
+/* quick apply */
+.quick-apply input, .quick-apply textarea{width:100%;margin:6px 0;padding:10px;border-radius:8px;border:1px solid #eee}
+
+/* training list */
+.training-list{list-style:none;padding:0;margin:0}
+.training-list li{padding:6px 0;border-bottom:1px dashed #f1f1f1}
+
+/* community */
+.community-feed .post{padding:8px;border-radius:8px;margin-top:8px;border:1px solid #f1f1f1}
+.community-feed .post strong{display:block}
+
+/* admin grid */
+.admin-grids{display:flex;gap:12px}
+.admin-grids > div{flex:1}
+
+/* modal */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:60}
+.hidden{display:none}
+.modal-card{width:95%;max-width:680px;background:#fff;border-radius:14px;padding:16px;position:relative}
+.modal-close{position:absolute;right:12px;top:10px;border:none;background:transparent;font-size:20px;cursor:pointer}
+.modal-card input, .modal-card textarea, .modal-card select{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #eee}
+
+.row{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+.row button{padding:10px 12px;border-radius:8px;border:none;cursor:pointe}
